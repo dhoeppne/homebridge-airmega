@@ -84,7 +84,7 @@ export class FilterService extends AbstractService {
       let statusForFilter = status.find(filter => filter.name == name);
       let indication;
 
-      if (statusForFilter.lifeLevel <= 20) {
+      if (statusForFilter?.lifeLevel <= 20) {
         indication = HAP.Characteristic.FilterChangeIndication.CHANGE_FILTER;
       } else {
         indication = HAP.Characteristic.FilterChangeIndication.FILTER_OK;
@@ -102,7 +102,7 @@ export class FilterService extends AbstractService {
       let status = await this.purifier.waitForFilterStatusUpdate();
       let statusForFilter = status.find(filter => filter.name == name);
 
-      return statusForFilter.lifeLevel;
+      return statusForFilter?.lifeLevel;
     } catch(e) {
       Logger.error(`Unable to get filter life level for ${name}`, e);
       throw e;
